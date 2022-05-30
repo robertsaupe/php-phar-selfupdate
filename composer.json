@@ -1,0 +1,43 @@
+{
+    "name": "robertsaupe/php-phar-selfupdate",
+    "description": "php library for phar selfupdate with a manifest file",
+    "keywords": [
+        "php",
+        "php8",
+        "library",
+        "phar",
+        "selfupdate",
+        "update",
+        "manifest"
+    ],
+    "homepage": "https://github.com/robertsaupe/php-phar-selfupdate",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Saupe",
+            "email": "mail@robertsaupe.de",
+            "homepage": "https://robertsaupe.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0 || ^8.1",
+        "laravel-zero/phar-updater": "^1.3"
+    },
+    "autoload": {
+        "psr-4": { 
+            "robertsaupe\\Phar\\SelfUpdate\\": "src/"
+        }
+    },
+    "conflict": {
+        "padraic/phar-updater": "*"
+    },
+    "config": {
+        "platform": {
+            "php": "8.0.0"
+        },
+        "platform-check": false,
+        "sort-packages": true
+    }
+}
