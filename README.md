@@ -113,7 +113,7 @@ try {
 
 #### Bash
 
-```bash
+```sh
 sha1sum file.phar
 sha256sum file.phar
 sha512sum file.phar
