@@ -22,8 +22,8 @@
         }
     ],
     "require": {
-        "php": "^8.0 || ^8.1",
-        "laravel-zero/phar-updater": "^1.3"
+        "php": ">=8.0.0",
+        "laravel-zero/phar-updater": "^1"
     },
     "autoload": {
         "psr-4": { 
