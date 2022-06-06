@@ -45,6 +45,9 @@
     ],
     "require": {
         "php": ">=8.0.0",
+        "ext-hash": "*",
+        "ext-json": "*",
+        "ext-phar": "*",
         "laravel-zero/phar-updater": "^1"
     },
     "require-dev": {
