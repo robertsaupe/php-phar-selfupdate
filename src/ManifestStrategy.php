@@ -40,8 +40,9 @@ final class ManifestStrategy implements StrategyInterface {
     const ANY = 'any';
 
     /**
-     * @var array
+     * @var string[]
      */
+    /** @phpstan-ignore-next-line */
     private $requiredKeys = array(self::SHA256, 'version', 'url');
 
     /**
@@ -52,16 +53,19 @@ final class ManifestStrategy implements StrategyInterface {
     /**
      * @var string
      */
+    /** @phpstan-ignore-next-line */
     private $manifestUrl;
 
     /**
-     * @var array
+     * @var mixed[]
      */
+    /** @phpstan-ignore-next-line */
     private $manifest;
 
     /**
-     * @var array
+     * @var mixed[]
      */
+    /** @phpstan-ignore-next-line */
     private $availableVersions;
 
     /**
@@ -104,7 +108,7 @@ final class ManifestStrategy implements StrategyInterface {
      *
      * @param string $version
      */
-    public function setCurrentLocalVersion($version)
+    public function setCurrentLocalVersion($version): ManifestStrategy
     {
         $this->localVersion = $version;
         return $this;
@@ -130,19 +134,19 @@ final class ManifestStrategy implements StrategyInterface {
         return $this;
     }
 
-    public function useSha1()
+    public function useSha1(): void
     {
         $this->requiredKeys[0] = self::SHA1;
         $this->hashAlgo = self::SHA1;
     }
 
-    public function useSha256()
+    public function useSha256(): void
     {
         $this->requiredKeys[0] = self::SHA256;
         $this->hashAlgo = self::SHA256;
     }
 
-    public function useSha512()
+    public function useSha512(): void
     {
         $this->requiredKeys[0] = self::SHA512;
         $this->hashAlgo = self::SHA512;
@@ -152,7 +156,7 @@ final class ManifestStrategy implements StrategyInterface {
      * If set, ignores any restrictions based on currently running PHP version.
      * @return  self
      */
-    public function ignorePhpRequirements()
+    public function ignorePhpRequirements(): ManifestStrategy
     {
         $this->ignorePhpReq = true;
         return $this;
@@ -162,7 +166,7 @@ final class ManifestStrategy implements StrategyInterface {
      * If set, ignores any restrictions based on currently running PHP version.
      * @return  self
      */
-    public function allowMajorVersionUpdates()
+    public function allowMajorVersionUpdates(): ManifestStrategy
     {
         $this->allowMajor = true;
         return $this;
@@ -173,7 +177,7 @@ final class ManifestStrategy implements StrategyInterface {
      *
      * @param string $stability
      */
-    public function setStability($stability)
+    public function setStability($stability): ManifestStrategy
     {
         if ($stability !== self::STABLE && $stability !== self::UNSTABLE && $stability !== self::ANY) {
             throw new InvalidArgumentException(
@@ -193,6 +197,7 @@ final class ManifestStrategy implements StrategyInterface {
             default:
                 break;
         }
+        return $this;
     }
 
     /**
@@ -205,7 +210,7 @@ final class ManifestStrategy implements StrategyInterface {
         return $this;
     }
 
-    public function setManifestUrl($url)
+    public function setManifestUrl(string $url): ManifestStrategy
     {
         $this->manifestUrl = $url;
         return $this;
@@ -332,10 +337,10 @@ final class ManifestStrategy implements StrategyInterface {
     /**
      * Gets available versions to update to.
      *
-     * @return array  An array keyed by the version name, whose elements are arrays
+     * @return mixed[]  An array keyed by the version name, whose elements are arrays
      *                containing version information ('name', $this->hashAlgo, and 'url').
      */
-    private function getAvailableVersions()
+    private function getAvailableVersions(): array
     {
         if (isset($this->availableVersions)) {
             return $this->availableVersions;
@@ -360,9 +365,9 @@ final class ManifestStrategy implements StrategyInterface {
     /**
      * Download and decode the JSON manifest file.
      *
-     * @return array
+     * @return mixed[]
      */
-    private function retrieveManifest()
+    private function retrieveManifest(): array
     {
         if (isset($this->manifest)) {
             return $this->manifest;
@@ -392,9 +397,9 @@ final class ManifestStrategy implements StrategyInterface {
      *
      * @param Updater $updater
      *
-     * @return array
+     * @return mixed[]
      */
-    private function getRemoteVersionInfo(Updater $updater)
+    private function getRemoteVersionInfo(Updater $updater): array
     {
         $version = $this->getCurrentRemoteVersion($updater);
         if ($version === false) {
